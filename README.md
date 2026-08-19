@@ -3,19 +3,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Słoneczna Macedonia i Półwysep Chalkidiki – Pacia Travel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root {
-            --primary: #0A2540;
-            --accent: #007791;
-            --gold: #D4AF37;
-            --light-bg: #F8FAFC;
+            --primary: #032B42;
+            --accent: #00A896;
+            --secondary: #028090;
+            --gold: #F4A261;
+            --coral: #E76F51;
+            --light-bg: #F4F7F6;
             --card-bg: #FFFFFF;
-            --text-dark: #1E293B;
+            --text-dark: #1D2D44;
             --text-muted: #64748B;
             --border: #E2E8F0;
-            --coral: #E07A5F;
+            --gradient-hero: linear-gradient(135deg, rgba(3,43,66,0.82), rgba(0,168,150,0.82));
+            --gradient-card: linear-gradient(135deg, #028090 0%, #00A896 100%);
+            --gradient-dark: linear-gradient(135deg, #032B42 0%, #028090 100%);
         }
 
         * {
@@ -28,23 +32,26 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--light-bg);
             color: var(--text-dark);
-            line-height: 1.6;
+            line-height: 1.65;
+            overflow-x: hidden;
         }
 
         a {
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.2s ease;
         }
 
         a:hover {
+            color: var(--coral);
             text-decoration: underline;
         }
 
         header {
-            background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(0, 119, 145, 0.75)), url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            background: var(--gradient-hero), url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             color: #FFFFFF;
-            padding: clamp(60px, 8vw, 100px) 20px;
+            padding: clamp(50px, 7vw, 90px) 20px;
             text-align: center;
         }
 
@@ -57,27 +64,32 @@
             display: inline-block;
             background-color: var(--gold);
             color: var(--primary);
-            padding: 6px 18px;
+            padding: 8px 22px;
             font-weight: 700;
-            border-radius: 20px;
+            border-radius: 25px;
             text-transform: uppercase;
             font-size: 0.85rem;
             letter-spacing: 1px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.1rem, 5.5vw, 3.2rem);
             margin-bottom: 15px;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-size: clamp(1.05rem, 2.5vw, 1.3rem);
             font-weight: 300;
             opacity: 0.95;
             margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .quick-stats {
@@ -85,154 +97,167 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .stat-card {
             background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            white-space: nowrap;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: clamp(30px, 5vw, 50px) 15px;
+            padding: clamp(30px, 5vw, 50px) 18px;
         }
 
         .route-box {
             background-color: var(--card-bg);
-            border-left: 5px solid var(--gold);
-            padding: 22px 25px;
-            border-radius: 10px;
+            border-left: 6px solid var(--gold);
+            padding: 22px 28px;
+            border-radius: 12px;
             margin-bottom: 35px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         .route-box h3 {
             color: var(--primary);
             margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
         }
 
         .intro-hero-box {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #E6F4F1 100%);
             border: 2px solid var(--accent);
             padding: clamp(25px, 4vw, 40px);
-            border-radius: 16px;
+            border-radius: 18px;
             margin-bottom: 45px;
-            box-shadow: 0 10px 25px rgba(0,119,145,0.08);
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0,168,150,0.1);
         }
 
         .intro-hero-box p {
-            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
             color: var(--primary);
-            line-height: 1.8;
+            line-height: 1.85;
             font-weight: 500;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             color: var(--primary);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .tiles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 50px;
+            margin-bottom: 55px;
         }
 
         .tile-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 24px;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: var(--gradient-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 20px rgba(0,168,150,0.18);
             display: flex;
-            align-items: flex-start;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 180px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .tile-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,168,150,0.28);
+        }
+
+        .tile-card.span-full {
+            grid-column: 1 / -1;
+            min-height: 140px;
+            padding: 25px 30px;
         }
 
         .tile-icon {
-            font-size: 2rem;
+            font-size: 2.8rem;
             line-height: 1;
-            flex-shrink: 0;
+            margin-bottom: 14px;
         }
 
         .tile-text {
+            color: #FFFFFF;
+            font-style: italic;
             font-size: 0.98rem;
-            color: var(--text-dark);
             font-weight: 500;
+            line-height: 1.5;
         }
 
         #map-container {
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid var(--border);
-            padding: 20px;
-            margin-bottom: 45px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            padding: 22px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
         }
 
         #map {
-            height: clamp(300px, 50vh, 450px);
+            height: clamp(320px, 50vh, 460px);
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         .day-card {
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid var(--border);
-            padding: clamp(20px, 3vw, 32px);
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            padding: clamp(22px, 3.5vw, 35px);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .day-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.2rem, 3vw, 1.45rem);
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
             color: var(--primary);
             border-bottom: 2px solid var(--light-bg);
             padding-bottom: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .day-body {
-            font-size: 0.98rem;
+            font-size: 1rem;
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .restaurants-box {
-            background-color: #F8FAFC;
-            padding: 16px 20px;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-            font-size: 0.92rem;
+            background: #EBF7F5;
+            padding: 18px 22px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent);
+            font-size: 0.95rem;
         }
 
         .restaurants-box strong {
             color: var(--primary);
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
         }
 
         .restaurants-box ul {
@@ -245,22 +270,100 @@
 
         .grid-two {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .noclegi-card {
+            background: var(--gradient-dark);
+            color: #FFFFFF;
+            border-radius: 16px;
+            padding: clamp(25px, 3vw, 35px);
+            box-shadow: 0 8px 20px rgba(3,43,66,0.15);
+        }
+
+        .noclegi-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .noclegi-card a {
+            color: #72EFDD;
+        }
+
+        .noclegi-card a:hover {
+            color: #FFFFFF;
+        }
+
+        .noclegi-card .custom-list li::before {
+            color: var(--gold);
+        }
+
+        .standalone-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 2px solid var(--gold);
+            padding: clamp(22px, 3vw, 30px);
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px rgba(244,162,97,0.12);
+        }
+
+        .standalone-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .atrakcje-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
+        }
+
+        .atrakcja-card {
+            background: var(--gradient-card);
+            border-radius: 16px;
+            padding: 24px;
+            color: #FFFFFF;
+            box-shadow: 0 6px 16px rgba(0,168,150,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .atrakcja-card .tile-icon {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+
+        .atrakcja-card p {
+            font-style: italic;
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .atrakcja-card a {
+            color: #FFE6A7;
         }
 
         .info-card {
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid var(--border);
             padding: clamp(22px, 3vw, 32px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .info-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             color: var(--primary);
             margin-bottom: 18px;
         }
@@ -271,18 +374,18 @@
 
         .custom-list li {
             position: relative;
-            padding-left: 22px;
+            padding-left: 24px;
             margin-bottom: 12px;
-            font-size: 0.95rem;
+            font-size: 0.96rem;
         }
 
         .custom-list li::before {
             content: "•";
             color: var(--accent);
             font-weight: bold;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             position: absolute;
-            left: 2px;
+            left: 3px;
             top: -4px;
         }
 
@@ -290,15 +393,34 @@
             background-color: var(--primary);
             color: #FFFFFF;
             text-align: center;
-            padding: 35px 20px;
-            font-size: 0.9rem;
+            padding: 40px 20px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        @media (max-width: 850px) {
+            .tiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tile-card.span-full {
+                grid-column: auto;
+            }
+
+            .grid-two {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 600px) {
-            .quick-stats { flex-direction: column; align-items: stretch; }
-            .stat-card { text-align: center; }
-            .tiles-grid { grid-template-columns: 1fr; }
-            .grid-two { grid-template-columns: 1fr; }
+            .quick-stats {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stat-card {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -358,7 +480,7 @@
                 <div class="tile-icon">🎶</div>
                 <div class="tile-text">Magiczny wieczór w tradycyjnej tawernie przy dźwiękach greckiej muzyki na żywo.</div>
             </div>
-            <div class="tile-card">
+            <div class="tile-card span-full">
                 <div class="tile-icon">🏖️</div>
                 <div class="tile-text">Błogi wypoczynek na lazurowych plażach Półwyspu Sytonia.</div>
             </div>
@@ -384,7 +506,7 @@
                 Po śniadaniu w hotelu wyruszycie w stronę Masywu Olimpu. Rozpoczniecie od spaceru po urokliwym miasteczku Litochoro, które zbudowane jest w tradycyjnej zabudowie. Tam polecamy wstąpić na kawę do klimatycznej kawiarni na głównym rynku. Później czeka Was przyjemny trekking wzdłuż malowniczego wąwozu Enipeas. Dotrzecie do punktu Prionia na wysokości 1100 m n.p.m., skąd roztacza się zachwycający widok. Po drodze miniecie dawny klasztor św. Dionizego. W drugiej części dnia możecie odwiedzić ruiny zamku Platamonas lub zabytkową wieś Palaios Panteleimonas. Po zwiedzaniu czas na kolację w lokalnej restauracji i powrót do Waszego hotelu.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Gastrodromio En Olympo w Litochoro – <a href="https://maps.app.goo.gl/pkuJJ4LR58Ky7osM9" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Ta Mezedakia – <a href="https://maps.app.goo.gl/cMTbJx5bcYQLmAi18" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -399,7 +521,7 @@
                 Po śniadaniu wyruszycie na jednodniową wycieczkę do słynnych Meteorów. Odkryjecie majestatyczne monastyry wybudowane na pionowych skałach i zwiedzicie wybrane wnętrza klasztorne. W ciągu dnia będziecie mogli zatrzymać się w kawiarni z panoramicznym widokiem na skały. Przed wieczornym powrotem polecamy obejrzeć zachód słońca nad doliną z punktu widokowego Psaropetra. Na noc wracacie do swojego hotelu w okolicy Riwiery Olimpijskiej.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Meteoron Panorama w Kalambace – <a href="https://maps.app.goo.gl/owsoqVRnNGJt1uNa8?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Valia Calda w Kalambace – <a href="https://maps.app.goo.gl/sFJ6ZpmbB2KJWZ7N9?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -414,7 +536,7 @@
                 Po śniadaniu wykwaterujecie się z hotelu i przejedziecie do malowniczej Edesy, aby podziwiać słynny park przyrodniczy oraz szumiące wodospady. Możecie wypić kawę w lokalu tuż obok kaskad wodnych. Następnie przejedziecie do Salonik i wjedziecie na wzgórze Ano Poli, skąd rozpościera się panorama całego miasta. Popołudnie spędzicie na spacerze po historycznej dzielnicy Ladadika. Wieczorem polecamy zasiąść w tradycyjnej greckiej tawernie na wyjątkową kolację połączoną z koncertem muzyki na żywo. Po wieczornych atrakcjach przejedziecie do waszej drugiej bazy noclegowej w okolicy Półwyspu Sytonia.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Palati – <a href="https://maps.app.goo.gl/M2zQVZrGPk2yT7956?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
                 </ul>
@@ -427,7 +549,7 @@
                 Pierwszy dzień totalnego lenistwa. Robicie to, na co macie ochotę! Jeśli nabierzecie ochoty na małą wyprawę, możecie pojechać na krótką wycieczkę do zabytkowej miejscowości Afytos na Półwyspie Kasandra, słynącej z tradycyjnej kamiennej zabudowy. Zatrzymacie się tam na kawę i deser w urokliwym miejscu na klifie z niesamowitym widokiem na morze.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Thea Thalassa w Afytos – <a href="https://maps.app.goo.gl/2pEKnwc7viM1W9BE9?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Strouboulis Restaurant w Afytos – <a href="https://maps.app.goo.gl/6bqJBqwUZtuZ6pg8A?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -442,7 +564,7 @@
                 Czas przeznaczony na pełny wypoczynek. Oddacie się relaksowi na piaszczystych plażach Sytonii słynących z krystalicznie czystej wody.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Tzitzikas w Porto Koufo – <a href="https://maps.app.goo.gl/4f3jLs7XMGVwHTFMA" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Paidiko Sxoleio w Sarti – <a href="https://maps.app.goo.gl/3bbzcjLES72wm3Pb9?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -456,7 +578,7 @@
                 Po śniadaniu czeka Was wyjątkowa morska przygoda! Wyruszycie w rejs łodzią wokół wyspy Diaporos oraz bezludnych wysepek archipelagu Vourvourou. Będziecie kąpać się w słynnej Błękitnej Lagunie i odkrywać ukryte plaże dostępne wyłącznie od strony morza. W południe odpoczniecie przy kawie w uroczej kawiarence nadmorskiej, a na kolację ze świeżo złowioną rybą wyruszycie do sprawdzonej tawerny rybnej.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Aristos Fish Restaurant w Ormos Panagias – <a href="https://maps.app.goo.gl/PXc2hTGzumAuUuHy8?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Taverna Akrogiali w Vourvourou – <a href="https://maps.app.goo.gl/yJ3szyiZ9LriBMsA9?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -470,7 +592,7 @@
                 Po śniadaniu i wymeldowaniu z hotelu przejedziecie do serca Salonik. Zwiedzicie reprezentacyjny plac Arystotelesa oraz zobaczycie słynną Białą Wieżę stojącą przy nadmorskim bulwarze, skąd roztacza się piękny widok z tarasu. Wypijecie pożegnalną kawę w starym porcie z widokiem na całe miasto. Zrobicie ostatnie zakupy greckich specjałów, oliwy oraz przypraw na tradycyjnym targu. Następnie przejedziecie na lotnisko w Salonikach, zwrócicie samochód i odlecicie do Warszawy.
             </div>
             <div class="restaurants-box">
-                <strong>Propozycje restauracji</strong>
+                <strong>🍽️ Propozycje restauracji</strong>
                 <ul>
                     <li>Brunchsin – <a href="https://maps.app.goo.gl/f2SDTfcpmY2QHfD87?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Mpakal – <a href="https://maps.app.goo.gl/tdm54XoaKvpKTRnz6?g_st=ac" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -479,17 +601,20 @@
             </div>
         </div>
 
-        <div class="grid-two">
-            <div class="info-card">
+        <div class="noclegi-card grid-two">
+            <div>
                 <h3>Propozycje noclegów</h3>
-                <strong style="color: var(--accent); display: block; margin-bottom: 8px;">Okolice Riwiery Olimpijskiej</strong>
-                <ul class="custom-list" style="margin-bottom: 20px;">
+                <strong style="color: var(--gold); display: block; margin-bottom: 10px;">Okolice Riwiery Olimpijskiej</strong>
+                <ul class="custom-list">
                     <li>ZOI Girni - Seaside Hotel – <a href="https://www.booking.com/Share-ZZDsIMr" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Olympus Mediterranean Boutique Hotel – <a href="https://www.booking.com/Share-t9Mc9h" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Xenios Dias Boutique Hotel – <a href="https://www.booking.com/Share-To5sOwj" target="_blank" rel="noopener">tu jestem</a>.</li>
                 </ul>
+            </div>
 
-                <strong style="color: var(--accent); display: block; margin-bottom: 8px;">Okolice Sytonii</strong>
+            <div>
+                <h3 style="visibility: hidden;">Noclegi część 2</h3>
+                <strong style="color: var(--gold); display: block; margin-bottom: 10px;">Okolice Sytonii</strong>
                 <ul class="custom-list">
                     <li>Saint George Sithonia – <a href="https://www.booking.com/Share-5uigr8C" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Angelina Hotel – <a href="https://www.booking.com/Share-3t21ey" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -498,25 +623,36 @@
                     <li>Assa Maris Beach Hotel – <a href="https://www.booking.com/Share-TIIhD9" target="_blank" rel="noopener">tu jestem</a>.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="info-card">
-                <h3>Wynajęcie samochodu & Płatne atrakcje</h3>
-                <strong style="color: var(--accent); display: block; margin-bottom: 8px;">Wynajęcie samochodu</strong>
-                <p style="margin-bottom: 20px; font-size: 0.95rem;">
-                    Rezerwacja pojazdu poprzez Potos Car Rentals – <a href="https://share.google/C06e8YoUTvZHIkLzN" target="_blank" rel="noopener">tu jestem</a>.
-                </p>
+        <div class="standalone-card">
+            <h3>Wynajęcie samochodu</h3>
+            <p style="font-size: 1rem; color: var(--text-dark);">
+                Wygodna rezerwacja sprawzonego pojazdu na cały pobyt poprzez Potos Car Rentals – <a href="https://share.google/C06e8YoUTvZHIkLzN" target="_blank" rel="noopener">tu jestem</a>.
+            </p>
+        </div>
 
-                <strong style="color: var(--accent); display: block; margin-bottom: 8px;">Płatne atrakcje</strong>
-                <ul class="custom-list">
-                    <li>Klasztory w Meteorach – koszt wstępu wynosi około 3–5 EUR za osobę za wejście do jednego wybranego klasztoru. Bilety kupuje się bezpośrednio w kasie przy wejściu do danego obiektu.</li>
-                    <li>Biała Wieża w Salonikach – koszt biletów wstępu wynosi około 6 EUR za osobę. Wejściówki można nabyć w kasie na miejscu.</li>
-                    <li>Zamek Platamonas – wstęp kosztuje około 4 EUR za osobę. Bilety kupuje się w kasie przy wejściu do twierdzy.</li>
-                    <li>Rejs łodzią na Wyspę Diaporos i Błękitną Lagunę – udział w wycieczce morskiej ze sternikiem kosztuje około 25–35 EUR za osobę. Wynajem prywatnej motorówki bez patentu na cały dzień to koszt od około 80–120 EUR plus paliwo. Rezerwacja wycieczek na platformie GetYourGuide – <a href="https://share.google/oLdcs7qHq0xC2eqUv" target="_blank" rel="noopener">tu jestem</a>.</li>
-                </ul>
+        <h2 class="section-title">Płatne atrakcje</h2>
+        <div class="atrakcje-grid">
+            <div class="atrakcja-card">
+                <div class="tile-icon">🏛️</div>
+                <p>Klasztory w Meteorach – koszt wstępu wynosi około 3–5 EUR za osobie za wejście do jednego wybranego klasztoru. Bilety kupuje się bezpośrednio w kasie przy wejściu do danego obiektu.</p>
+            </div>
+            <div class="atrakcja-card">
+                <div class="tile-icon">🏰</div>
+                <p>Biała Wieża w Salonikach – koszt biletów wstępu wynosi około 6 EUR za osobę. Wejściówki można nabyć w kasie na miejscu.</p>
+            </div>
+            <div class="atrakcja-card">
+                <div class="tile-icon">🛡️</div>
+                <p>Zamek Platamonas – wstęp kosztuje około 4 EUR za osobę. Bilety kupuje się w kasie przy wejściu do twierdzy.</p>
+            </div>
+            <div class="atrakcja-card">
+                <div class="tile-icon">⛵</div>
+                <p>Rejs łodzią na Wyspę Diaporos i Błękitną Lagunę – udział w wycieczce morskiej ze sternikiem kosztuje około 25–35 EUR za osobę. Wynajem prywatnej motorówki bez patentu to koszt od około 80–120 EUR plus paliwo. Rezerwacja na platformie GetYourGuide – <a href="https://share.google/oLdcs7qHq0xC2eqUv" target="_blank" rel="noopener">tu jestem</a>.</p>
             </div>
         </div>
 
-        <div class="info-card" style="margin-bottom: 40px;">
+        <div class="info-card">
             <h3>Uwagi praktyczne</h3>
             <ul class="custom-list">
                 <li>Do podróży do Grecji dla obywateli polskich wymagany jest ważny dowód osobisty lub paszport.</li>
