@@ -17,7 +17,7 @@
             --text-dark: #1D2D44;
             --text-muted: #64748B;
             --border: #E2E8F0;
-            --gradient-hero: linear-gradient(135deg, rgba(3,43,66,0.82), rgba(0,168,150,0.82));
+            --gradient-hero: linear-gradient(135deg, rgba(3,43,66,0.85), rgba(0,168,150,0.85));
             --gradient-card: linear-gradient(135deg, #028090 0%, #00A896 100%);
             --gradient-dark: linear-gradient(135deg, #032B42 0%, #028090 100%);
         }
@@ -123,7 +123,7 @@
             border-left: 6px solid var(--gold);
             padding: 22px 28px;
             border-radius: 12px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
@@ -132,6 +132,21 @@
             margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
             font-size: 1.35rem;
+        }
+
+        #map-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 22px;
+            margin-bottom: 45px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        #map {
+            height: clamp(320px, 50vh, 460px);
+            width: 100%;
+            border-radius: 12px;
         }
 
         .intro-hero-box {
@@ -204,21 +219,6 @@
             line-height: 1.5;
         }
 
-        #map-container {
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            padding: 22px;
-            margin-bottom: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-
-        #map {
-            height: clamp(320px, 50vh, 460px);
-            width: 100%;
-            border-radius: 12px;
-        }
-
         .day-card {
             background: var(--card-bg);
             border-radius: 16px;
@@ -275,31 +275,30 @@
             margin-bottom: 35px;
         }
 
-        .noclegi-card {
+        .noclegi-tile {
             background: var(--gradient-dark);
             color: #FFFFFF;
             border-radius: 16px;
             padding: clamp(25px, 3vw, 35px);
             box-shadow: 0 8px 20px rgba(3,43,66,0.15);
+            display: flex;
+            flex-direction: column;
         }
 
-        .noclegi-card h3 {
+        .noclegi-tile h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
-        .noclegi-card a {
+        .noclegi-tile a {
             color: #72EFDD;
         }
 
-        .noclegi-card a:hover {
+        .noclegi-tile a:hover {
             color: #FFFFFF;
-        }
-
-        .noclegi-card .custom-list li::before {
-            color: var(--gold);
         }
 
         .standalone-card {
@@ -307,7 +306,7 @@
             border-radius: 16px;
             border: 2px solid var(--gold);
             padding: clamp(22px, 3vw, 30px);
-            margin-bottom: 35px;
+            margin-bottom: 45px;
             box-shadow: 0 4px 15px rgba(244,162,97,0.12);
         }
 
@@ -322,29 +321,31 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .atrakcja-card {
             background: var(--gradient-card);
             border-radius: 16px;
-            padding: 24px;
+            padding: 26px 20px;
             color: #FFFFFF;
             box-shadow: 0 6px 16px rgba(0,168,150,0.15);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            justify-content: center;
+            min-height: 200px;
         }
 
         .atrakcja-card .tile-icon {
-            font-size: 2.4rem;
-            margin-bottom: 10px;
+            font-size: 2.6rem;
+            margin-bottom: 12px;
         }
 
         .atrakcja-card p {
             font-style: italic;
-            font-size: 0.92rem;
+            font-size: 0.94rem;
             line-height: 1.55;
         }
 
@@ -389,13 +390,22 @@
             top: -4px;
         }
 
+        .noclegi-tile .custom-list li::before {
+            color: var(--gold);
+        }
+
         footer {
             background-color: var(--primary);
             color: #FFFFFF;
             text-align: center;
             padding: 40px 20px;
             font-size: 0.95rem;
-            width: 100%;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
 
         @media (max-width: 850px) {
@@ -448,6 +458,11 @@
             <p><strong>Saloniki – Litochoro – Masyw Olimpu – Meteory – Edesa – Półwysep Sytonia – Rejs na Diaporos – Saloniki</strong></p>
         </div>
 
+        <div id="map-container">
+            <h3 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 15px;">Mapa Trasy i Atrakcji</h3>
+            <div id="map"></div>
+        </div>
+
         <div class="intro-hero-box">
             <p>
                 Wasza wyjątkowa grecka podróż to marzenie każdego nowożeńca! Wyprawa łącząca fascynującą historię, mityczne krajobrazy oraz beztroski wypoczynek nad brzegiem Morza Egejskiego. Podczas tego wyjazdu odkryjecie tajemnice mitycznego Masywu Olimpu, przejdziecie urokliwymi szlakami w Litochoro oraz zachwycicie się słynnymi klasztorami w Meteorach wzniesionymi na skałach zawieszonych między niebem a ziemią. Odbędziecie również romantyczny rejs łodzią po turkusowych zatokach wyspy Diaporos i zregenerujecie siły na najpiękniejszych piaszczystych plażach Półwyspu Sytonia.
@@ -484,11 +499,6 @@
                 <div class="tile-icon">🏖️</div>
                 <div class="tile-text">Błogi wypoczynek na lazurowych plażach Półwyspu Sytonia.</div>
             </div>
-        </div>
-
-        <div id="map-container">
-            <h3 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 15px;">Mapa Trasy i Atrakcji</h3>
-            <div id="map"></div>
         </div>
 
         <h2 class="section-title">Dzienny Program Wyjazdu</h2>
@@ -601,10 +611,10 @@
             </div>
         </div>
 
-        <div class="noclegi-card grid-two">
-            <div>
-                <h3>Propozycje noclegów</h3>
-                <strong style="color: var(--gold); display: block; margin-bottom: 10px;">Okolice Riwiery Olimpijskiej</strong>
+        <h2 class="section-title">Propozycje noclegów</h2>
+        <div class="grid-two" style="margin-bottom: 45px;">
+            <div class="noclegi-tile">
+                <h3>Okolice Riwiery Olimpijskiej</h3>
                 <ul class="custom-list">
                     <li>ZOI Girni - Seaside Hotel – <a href="https://www.booking.com/Share-ZZDsIMr" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Olympus Mediterranean Boutique Hotel – <a href="https://www.booking.com/Share-t9Mc9h" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -612,9 +622,8 @@
                 </ul>
             </div>
 
-            <div>
-                <h3 style="visibility: hidden;">Noclegi część 2</h3>
-                <strong style="color: var(--gold); display: block; margin-bottom: 10px;">Okolice Sytonii</strong>
+            <div class="noclegi-tile">
+                <h3>Okolice Sytonii</h3>
                 <ul class="custom-list">
                     <li>Saint George Sithonia – <a href="https://www.booking.com/Share-5uigr8C" target="_blank" rel="noopener">tu jestem</a>.</li>
                     <li>Angelina Hotel – <a href="https://www.booking.com/Share-3t21ey" target="_blank" rel="noopener">tu jestem</a>.</li>
@@ -636,7 +645,7 @@
         <div class="atrakcje-grid">
             <div class="atrakcja-card">
                 <div class="tile-icon">🏛️</div>
-                <p>Klasztory w Meteorach – koszt wstępu wynosi około 3–5 EUR za osobie za wejście do jednego wybranego klasztoru. Bilety kupuje się bezpośrednio w kasie przy wejściu do danego obiektu.</p>
+                <p>Klasztory w Meteorach – koszt wstępu wynosi około 3–5 EUR za osobę za wejście do jednego wybranego klasztoru. Bilety kupuje się bezpośrednio w kasie przy wejściu do danego obiektu.</p>
             </div>
             <div class="atrakcja-card">
                 <div class="tile-icon">🏰</div>
@@ -648,7 +657,7 @@
             </div>
             <div class="atrakcja-card">
                 <div class="tile-icon">⛵</div>
-                <p>Rejs łodzią na Wyspę Diaporos i Błękitną Lagunę – udział w wycieczce morskiej ze sternikiem kosztuje około 25–35 EUR za osobę. Wynajem prywatnej motorówki bez patentu to koszt od około 80–120 EUR plus paliwo. Rezerwacja na platformie GetYourGuide – <a href="https://share.google/oLdcs7qHq0xC2eqUv" target="_blank" rel="noopener">tu jestem</a>.</p>
+                <p>Rejs łodzią na Wyspę Diaporos i Błękitną Lagunę – udział w wycieczce morskiej ze sternikiem kosztuje około 25–35 EUR za osobę. Wynajem prywatnej motorówki bez patentu na cały dzień to koszt od około 80–120 EUR plus paliwo. Rezerwacja na platformie GetYourGuide – <a href="https://share.google/oLdcs7qHq0xC2eqUv" target="_blank" rel="noopener">tu jestem</a>.</p>
             </div>
         </div>
 
