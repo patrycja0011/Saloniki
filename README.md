@@ -15,6 +15,7 @@
             --text-dark: #1E293B;
             --text-muted: #64748B;
             --border: #E2E8F0;
+            --coral: #E07A5F;
         }
 
         * {
@@ -43,7 +44,7 @@
         header {
             background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(0, 119, 145, 0.75)), url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             color: #FFFFFF;
-            padding: 90px 20px;
+            padding: clamp(60px, 8vw, 100px) 20px;
             text-align: center;
         }
 
@@ -67,13 +68,13 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 15px;
             line-height: 1.2;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             font-weight: 300;
             opacity: 0.95;
             margin-bottom: 30px;
@@ -82,142 +83,131 @@
         .quick-stats {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(8px);
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 12px;
             font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: clamp(30px, 5vw, 50px) 15px;
+        }
+
+        .route-box {
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--gold);
+            padding: 22px 25px;
+            border-radius: 10px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .route-box h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+        }
+
+        .intro-hero-box {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+            border: 2px solid var(--accent);
+            padding: clamp(25px, 4vw, 40px);
+            border-radius: 16px;
+            margin-bottom: 45px;
+            box-shadow: 0 10px 25px rgba(0,119,145,0.08);
+            position: relative;
+        }
+
+        .intro-hero-box p {
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            color: var(--primary);
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
             color: var(--primary);
             text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-size: 1.05rem;
-        }
-
-        .titles-box {
-            background-color: var(--card-bg);
-            border-left: 4px solid var(--accent);
-            padding: 25px;
-            border-radius: 8px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
-        .titles-box h3 {
-            color: var(--primary);
-            margin-bottom: 12px;
-            font-family: 'Playfair Display', serif;
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
         }
 
-        .titles-box ul {
-            list-style: none;
-        }
-
-        .titles-box li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .titles-box li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .info-foreign {
-            background-color: #EFF6FF;
-            border: 1px solid #BFDBFE;
-            color: #1E40AF;
-            padding: 18px 24px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-            font-size: 0.95rem;
-            text-align: center;
-        }
-
-        .highlights-box {
+        .tile-card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
+            border-radius: 14px;
+            padding: 24px;
             border: 1px solid var(--border);
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
         }
 
-        .custom-list {
-            list-style: none;
+        .tile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        .custom-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
+        .tile-icon {
+            font-size: 2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .tile-text {
             font-size: 0.98rem;
-        }
-
-        .custom-list li::before {
-            content: "•";
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 5px;
-            top: -5px;
+            color: var(--text-dark);
+            font-weight: 500;
         }
 
         #map-container {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border);
             padding: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            margin-bottom: 45px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         #map {
-            height: 420px;
+            height: clamp(300px, 50vh, 450px);
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .day-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border);
-            padding: 30px;
+            padding: clamp(20px, 3vw, 32px);
             margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         .day-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3vw, 1.45rem);
             color: var(--primary);
             border-bottom: 2px solid var(--light-bg);
             padding-bottom: 12px;
@@ -231,17 +221,18 @@
         }
 
         .restaurants-box {
-            background-color: #F1F5F9;
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 3px solid var(--gold);
+            background-color: #F8FAFC;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
             font-size: 0.92rem;
         }
 
         .restaurants-box strong {
             color: var(--primary);
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
         .restaurants-box ul {
@@ -249,21 +240,22 @@
         }
 
         .restaurants-box li {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .grid-two {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
         .info-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border);
-            padding: 30px;
+            padding: clamp(22px, 3vw, 32px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         .info-card h3 {
@@ -271,6 +263,27 @@
             font-size: 1.4rem;
             color: var(--primary);
             margin-bottom: 18px;
+        }
+
+        .custom-list {
+            list-style: none;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .custom-list li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.4rem;
+            position: absolute;
+            left: 2px;
+            top: -4px;
         }
 
         footer {
@@ -281,8 +294,10 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
+        @media (max-width: 600px) {
+            .quick-stats { flex-direction: column; align-items: stretch; }
+            .stat-card { text-align: center; }
+            .tiles-grid { grid-template-columns: 1fr; }
             .grid-two { grid-template-columns: 1fr; }
         }
     </style>
@@ -297,8 +312,8 @@
             
             <div class="quick-stats">
                 <div class="stat-card">✈️ Przelot z Warszawy</div>
-                <div class="stat-card">🚗 Wynajęty Samochód w Cenie</div>
-                <div class="stat-card">🏨 2 Bazy Noclegowe (BB)</div>
+                <div class="stat-card">🚗 Wynajęty samochód</div>
+                <div class="stat-card">🏨 Tylko 2 hotele</div>
                 <div class="stat-card">⌛ 8 Dni / 7 Nocy</div>
             </div>
         </div>
@@ -306,41 +321,47 @@
 
     <div class="container">
 
-        <div class="titles-box">
-            <h3>Propozycje Tytułów Wyjazdu</h3>
-            <ul>
-                <li>Słoneczna Macedonia i Półwysep Chalkidiki – Mityczny Olimp, Rejs na Diaporos i Meteory.</li>
-                <li>Grecka Podróż Poślubna – Mityczne Szczyty, Lazurowe Zatoki i Wieczór z Muzyką.</li>
-                <li>Saloniki, Meteory i Urokliwa Sytonia – Romantyczny Rejs, Wodospady i Dwie Bazy Noclegowe.</li>
-                <li>Skarby Północnej Grecji – Klasztory Meteorów, Błękitna Laguna i Relaks nad Morzem.</li>
-            </ul>
-        </div>
-
-        <div class="titles-box" style="border-left-color: var(--gold);">
+        <div class="route-box">
             <h3>Trasa Wyjazdu</h3>
             <p><strong>Saloniki – Litochoro – Masyw Olimpu – Meteory – Edesa – Półwysep Sytonia – Rejs na Diaporos – Saloniki</strong></p>
         </div>
 
-        <div class="info-foreign">
-            Osoby mieszkające poza granicami Polski, serdecznie zapraszamy do kontaktu z naszym biurem. Z przyjemnością przygotujemy indywidualną kalkulację przelotu z dowolnego portu lotniczego na świecie.
+        <div class="intro-hero-box">
+            <p>
+                Wasza wyjątkowa grecka podróż to marzenie każdego nowożeńca! Wyprawa łącząca fascynującą historię, mityczne krajobrazy oraz beztroski wypoczynek nad brzegiem Morza Egejskiego. Podczas tego wyjazdu odkryjecie tajemnice mitycznego Masywu Olimpu, przejdziecie urokliwymi szlakami w Litochoro oraz zachwycicie się słynnymi klasztorami w Meteorach wzniesionymi na skałach zawieszonych między niebem a ziemią. Odbędziecie również romantyczny rejs łodzią po turkusowych zatokach wyspy Diaporos i zregenerujecie siły na najpiękniejszych piaszczystych plażach Półwyspu Sytonia.
+            </p>
         </div>
 
-        <h2 class="section-title">Wstęp Prosprzedażowy i SEO</h2>
-        <p class="section-subtitle">
-            Wasza wyjątkowa grecka podróż to marzenie każdego nowożeńca! Wyprawa łącząca fascynującą historię, mityczne krajobrazy oraz beztroski wypoczynek nad brzegiem Morza Egejskiego. Podczas tego wyjazdu odkryjecie tajemnice mitycznego Masywu Olimpu, przejdziecie urokliwymi szlakami w Litochoro oraz zachwycicie się słynnymi klasztorami w Meteorach wzniesionymi na skałach zawieszonych między niebem a ziemią. Odbędziecie również romantyczny rejs łodzią po turkusowych zatokach wyspy Diaporos i zregenerujecie siły na najpiękniejszych piaszczystych plażach Półwyspu Sytonia.
-        </p>
-
-        <div class="highlights-box">
-            <h3 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 20px;">Miejsca które Was zachwycą</h3>
-            <ul class="custom-list">
-                <li>Mityczny Olimp oraz spektakularny wąwóz Enipeas w Litochoro.</li>
-                <li>Unikalne w skali świata klasztory w Meteorach usytuowane na skałach.</li>
-                <li>Park wodospadów w Edesie.</li>
-                <li>Panoramiczne widoki ze starego miasta Ano Poli w Salonikach.</li>
-                <li>Romantyczny rejs łodzią wokół wyspy Diaporos z kąpielą w Błękitnej Lagunie.</li>
-                <li>Magiczny wieczór w tradycyjnej tawernie przy dźwiękach greckiej muzyki na żywo.</li>
-                <li>Błogi wypoczynek na lazurowych plażach Półwyspu Sytonia.</li>
-            </ul>
+        <h2 class="section-title">Miejsca które Was zachwycą</h2>
+        <div class="tiles-grid">
+            <div class="tile-card">
+                <div class="tile-icon">⛰️</div>
+                <div class="tile-text">Mityczny Olimp oraz spektakularny wąwóz Enipeas w Litochoro.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">🏛️</div>
+                <div class="tile-text">Unikalne w skali świata klasztory w Meteorach usytuowane na skałach.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">💧</div>
+                <div class="tile-text">Park wodospadów w Edesie.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">🏙️</div>
+                <div class="tile-text">Panoramiczne widoki ze starego miasta Ano Poli w Salonikach.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">⛵</div>
+                <div class="tile-text">Romantyczny rejs łodzią wokół wyspy Diaporos z kąpielą w Błękitnej Lagunie.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">🎶</div>
+                <div class="tile-text">Magiczny wieczór w tradycyjnej tawernie przy dźwiękach greckiej muzyki na żywo.</div>
+            </div>
+            <div class="tile-card">
+                <div class="tile-icon">🏖️</div>
+                <div class="tile-text">Błogi wypoczynek na lazurowych plażach Półwyspu Sytonia.</div>
+            </div>
         </div>
 
         <div id="map-container">
@@ -457,8 +478,6 @@
                 </ul>
             </div>
         </div>
-
-        <p style="text-align: center; font-style: italic; color: var(--text-muted); margin-bottom: 40px;">Program ramowy. Kolejność może ulec zmianie.</p>
 
         <div class="grid-two">
             <div class="info-card">
